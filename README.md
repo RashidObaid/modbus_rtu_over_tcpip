@@ -1,5 +1,4 @@
-# Project Title
-Modbus RTU over TCP/IP
+# Modbus RTU over TCP/IP
 
 ## Description
 Personalized script to read/write modbus registers, specially Modbus RTU over TCP/IP communication 
