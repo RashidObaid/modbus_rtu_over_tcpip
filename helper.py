@@ -19,5 +19,4 @@ def get_commandline(server=True, description=None, cmdline=None):
     
     return parser.parse_args(cmdline)
 
-def get_certificate(cert_type):
-    return f"certificates/{cert_type}.crt"  # Adjust the path as necessary
+
