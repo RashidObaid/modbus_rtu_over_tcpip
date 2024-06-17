@@ -27,11 +27,17 @@ MPL 2.0
 
 2. Download this complete repository, browse to the folder in the terminal and run these (a few examples displayed):
 
-For RTU over TCPIP (please adjust all parameters as requried e.g host 192.168.X.X, etc etc): 
+### For RTU over TCPIP (please adjust all parameters as requried e.g host 192.168.X.X, etc etc): 
 
-```python gensetReadWrite.py --comm rtu_tcp --host 127.0.0.1 --port 502 --log debug --slave_id 1 --address 128 --value 1```
+Read Holding Registers:
 
-For TCP:
+```python gensetReadWrite.py --comm rtu_tcp --host 127.0.0.1 --port 502 --log debug --slave_id 1 --address 128 --endian little --function read```
+
+Write Holding Register:
+
+```python3 gensetReadWrite.py --comm rtu_tcp --host 127.0.0.1 --port 502 --log debug --slave_id 1 --address 128 --endian little --function write --value 1```
+
+### For TCP:
 
 Read Holding Registers:
 
