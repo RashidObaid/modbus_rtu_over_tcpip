@@ -9,7 +9,7 @@ def get_commandline(server=True, description=None, cmdline=None):
         "-f", "--framer", choices=["ascii", "rtu", "socket", "tls"], default="rtu"
     )
     parser.add_argument("-l", "--log", choices=["critical", "error", "warning", "info", "debug"], default="info")
-    parser.add_argument("-p", "--port", type=int, default=502)
+    parser.add_argument("-p", "--port", required=True)
     parser.add_argument("--baudrate", type=int, default=9600)
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--timeout", type=int, default=3)

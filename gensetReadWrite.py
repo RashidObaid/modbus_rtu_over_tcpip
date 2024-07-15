@@ -35,7 +35,9 @@ value_to_write = args.value
 endian = args.endian
 count = args.count
 register_type = args.register_type
-function = args.function 
+function = args.function
+baudrate=args.baudrate
+timeout=args.timeout 
 
 # Choose the correct client based on the communication type
 if args.comm == "tcp":
@@ -43,7 +45,7 @@ if args.comm == "tcp":
 elif args.comm == "rtu_tcp":
     client = ModbusTcpClient(ip_address, port=port, framer=ModbusRtuFramer)
 elif args.comm == "serial":
-    client = ModbusSerialClient(method='rtu', port=ip_address, baudrate=args.baudrate, timeout=args.timeout)
+    client = ModbusSerialClient(method='rtu', port=port, baudrate=baudrate, timeout=timeout)
 else:
     raise ValueError(f"Unsupported communication type: {args.comm}")
 
