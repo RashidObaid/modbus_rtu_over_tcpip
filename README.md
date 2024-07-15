@@ -27,7 +27,7 @@ MPL 2.0
 
 2. Download this complete repository, browse to the folder in the terminal and run these (a few examples displayed):
 
-<<<<<<< HEAD
+
 ### For Serial RTU (using COM ports):
 
 Read upto 50 registers at once for serial rtu using COM ports, reading more than 90 at once might not work, however upto 125 registers can be read at once using TCP without any issue:  
@@ -35,21 +35,17 @@ Read upto 50 registers at once for serial rtu using COM ports, reading more than
 ```python gensetReadWrite.py --comm serial --port COM6 --baudrate 9600 --log debug --slave_id 1 --address 1100 --function read --register_type holding --count 50 --endian little```
 
 
-=======
->>>>>>> 37b2e8a253ebe71a74befc611d0ea430af9b3949
 ### For RTU over TCPIP (please adjust all parameters as requried e.g host 192.168.X.X, etc etc): 
 
 Read Holding Registers:
 
-<<<<<<< HEAD
-=======
 ```python gensetReadWrite.py --comm rtu_tcp --host 127.0.0.1 --port 502 --log debug --slave_id 1 --address 128 --endian little --function read```
 
 Write Holding Register:
 
 ```python3 gensetReadWrite.py --comm rtu_tcp --host 127.0.0.1 --port 502 --log debug --slave_id 1 --address 128 --endian little --function write --value 1```
 
->>>>>>> 37b2e8a253ebe71a74befc611d0ea430af9b3949
+
 ### For TCP:
 
 Read Holding Registers:
