@@ -32,10 +32,12 @@ port = args.port
 slave_id = args.slave_id
 register_address = args.address
 value_to_write = args.value
+values_to_write = args.values
 endian = args.endian
 count = args.count
 register_type = args.register_type
 function = args.function
+function_code_write = args.function_code_write
 baudrate=args.baudrate
 timeout=args.timeout 
 
@@ -74,6 +76,19 @@ def write_holding_register(client, register_address, value_to_write, slave_id, e
         raise ValueError(f"Error writing register: {result}")
     return result
 
+def write_multiple_holding_registers(client, register_address, values_to_write, slave_id, endian='big'):
+    if endian == 'little':
+        values_to_write = [to_little_endian(val) for val in values_to_write]
+    elif endian == 'mixed':
+        values_to_write = [to_mixed_endian(val) for val in values_to_write]
+    elif endian == 'big':
+        values_to_write = [to_big_endian(val) for val in values_to_write]
+
+    result = client.write_registers(register_address, values_to_write, slave_id)
+    if result.isError():
+        raise ValueError(f"Error writing registers: {result}")
+    return result
+
 def read_coils(client, register_address, count, slave_id):
     result = client.read_coils(register_address, count, slave_id)
     if result.isError():
@@ -110,9 +125,14 @@ if client.connect():
     try:
         if function == 'write':
             if register_type == 'holding':
-                # Write value to register with endianness handling
-                write_holding_register(client, register_address, value_to_write, slave_id, endian)
-                print(f"Value {value_to_write} written to register {register_address} with {endian} endian.")
+                if function_code_write == "0x06":
+                    # Write a single register
+                    write_holding_register(client, register_address, value_to_write, slave_id, endian)
+                    print(f"Value {value_to_write} written to register {register_address} with {endian} endian, function code 0x06.")
+                elif function_code_write == "0x10":
+                    # Write multiple registers
+                    write_multiple_holding_registers(client, register_address, values_to_write, slave_id, endian)
+                    print(f"Value {values_to_write} written to register {register_address} with {endian} endian, function code 0x10.")
             elif register_type == 'coil':
                 # Write value to register with endianness handling
                 write_coil(client, slave_id, register_address, value_to_write,)

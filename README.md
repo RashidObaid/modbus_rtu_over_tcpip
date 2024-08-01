@@ -34,6 +34,10 @@ Read upto 50 registers at once for serial rtu using COM ports, reading more than
 
 ```python gensetReadWrite.py --comm serial --port COM6 --baudrate 9600 --log debug --slave_id 1 --address 1100 --function read --register_type holding --count 50 --endian little```
 
+Writing registers using function code 16 or 0x10 (i.e, write multiple register, default function code is 0x06):
+
+```python gensetReadWrite.py --comm serial --port COM6 --baudrate 9600 --log debug --slave_id 1 --address 166 --function write --register_type holding --count 1 --endian little --values 60 --function_code_write 0x10```
+
 
 ### For RTU over TCPIP (please adjust all parameters as requried e.g host 192.168.X.X, etc etc): 
 
